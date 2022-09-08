@@ -9,12 +9,19 @@
         <e p="_Scripts" t="Include">
           <e p="Fireball.cs" t="Include" />
           <e p="FPSInput.cs" t="Include" />
+          <e p="HideInstructions.cs" t="Include" />
+          <e p="LoseCondition.cs" t="Include" />
           <e p="MouseLook.cs" t="Include" />
           <e p="PlayerCharacter.cs" t="Include" />
           <e p="RayShooter.cs" t="Include" />
           <e p="ReactiveTarget.cs" t="Include" />
+          <e p="README.txt" t="Include" />
           <e p="SceneController.cs" t="Include" />
           <e p="WanderingAI.cs" t="Include" />
+          <e p="WinCondition.cs" t="Include" />
+        </e>
+        <e p="SkySeries Freebie" t="Include">
+          <e p="Hdri setup.txt" t="Include" />
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />

@@ -11,6 +11,7 @@ public class WanderingAI : MonoBehaviour
     private bool isAlive;
     public float speed = 3.0f;
     public float obstacleRange = 5.0f;
+    public bool isEnemy = true;
 
     private void Start()
     {
@@ -31,11 +32,19 @@ public class WanderingAI : MonoBehaviour
                         GameObject hitObject = hit.transform.gameObject;
                         if (hitObject.GetComponent<PlayerCharacter>())
                         {
-                            if (fireball == null)
+                            if (isEnemy)
                             {
-                                fireball = Instantiate(fireballPrefab) as GameObject;
-                                fireball.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
-                                fireball.transform.rotation = transform.rotation;
+                              if (fireball == null)
+                              {
+                                  fireball = Instantiate(fireballPrefab) as GameObject;
+                                  fireball.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
+                                  fireball.transform.rotation = transform.rotation;
+                              }  
+                            }
+                            else
+                            {
+                                float angle = Random.Range(-110, 110);
+                                transform.Rotate(0, angle, 0);
                             }
                         }
                         else if (hit.distance < obstacleRange)
