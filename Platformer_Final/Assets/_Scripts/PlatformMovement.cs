@@ -14,9 +14,20 @@ public class PlatformMovement : MonoBehaviour
     {
         // directionNum = 0;
     }
-    
-    
-    void Update()
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            directionNum++;
+            if (directionNum >= 4)
+            {
+                directionNum = 0;
+            }
+        }
+    }
+
+    void FixedUpdate()
     {
         Vector3 movement = new Vector3(0, 0, 0);
         
@@ -36,16 +47,7 @@ public class PlatformMovement : MonoBehaviour
         {
             movement = new Vector3(0, speed, 0);
         }
-        
-        if (Input.GetButtonDown("Jump"))
-        {
-            directionNum++;
-            if (directionNum >= 4)
-            {
-                directionNum = 0;
-            }
-        }
-        
+
         transform.position += movement *Time.deltaTime;
     }
 
