@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb4ea8935711234c903088767526d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 5
+  force: 15
   mainCam: {fileID: 0}
   bulletTime: 2
 --- !u!54 &786186698022189702
