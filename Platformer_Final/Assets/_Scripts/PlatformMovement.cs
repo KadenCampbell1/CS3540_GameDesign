@@ -8,6 +8,7 @@ public class PlatformMovement : MonoBehaviour
     public float speed = 2f;
     public int directionNum;
     public GameObject player;
+    public bool canMove = false;
 
 
     void Start()
@@ -17,7 +18,7 @@ public class PlatformMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && canMove)
         {
             directionNum++;
             if (directionNum >= 4)
@@ -48,7 +49,10 @@ public class PlatformMovement : MonoBehaviour
             movement = new Vector3(0, speed, 0);
         }
 
-        transform.position += movement *Time.deltaTime;
+        if (canMove)
+        {
+            transform.position += movement *Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,6 +60,7 @@ public class PlatformMovement : MonoBehaviour
         if (other.gameObject == player)
         {
             player.transform.parent = transform;
+            canMove = true;
         }
     }
 
@@ -64,6 +69,7 @@ public class PlatformMovement : MonoBehaviour
         if (other.gameObject == player)
         {
             player.transform.parent = null;
+            canMove = false;
         }
     }
 }

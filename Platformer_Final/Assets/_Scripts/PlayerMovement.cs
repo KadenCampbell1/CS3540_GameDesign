@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,11 @@ public class PlayerMovement : MonoBehaviour
     private float gravity = -40f, yAxisVar;
     private int jumpCount;
 
+    public GameObject canJumpPlatform;
     public float speed, normalSpeed, fastSpeed, jumpForce;
     public int jumpMax;
-    
+    public bool canJump = true;
+
 
     private void Start()
     {
@@ -30,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
             jumpCount = 0;
         }
 
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax && canJump)
         {
             yAxisVar = jumpForce;
             jumpCount++;
@@ -47,7 +50,23 @@ public class PlayerMovement : MonoBehaviour
             speed = normalSpeed;
         }
         
-        movement.Set(horizontalInput, yAxisVar, 0);
-        controller.Move(movement * (speed * Time.deltaTime));
+        movement.Set(horizontalInput * (speed), yAxisVar, 0);
+        controller.Move(movement * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == canJumpPlatform)
+        {
+            canJump = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == canJumpPlatform)
+        {
+            canJump = true;
+        }
     }
 }
