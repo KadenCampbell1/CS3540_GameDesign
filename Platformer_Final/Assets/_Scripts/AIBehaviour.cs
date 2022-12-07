@@ -8,6 +8,7 @@ public class AIBehaviour : MonoBehaviour
 {
     public Transform[] waypoints;
     public GameObject player;
+    public EnemySprite enemySpriteAnim;
     
     private bool canPatrol, canHunt;
     private NavMeshAgent agent;
@@ -33,6 +34,7 @@ public class AIBehaviour : MonoBehaviour
                 yield return wfs;
                 agent.destination = waypoints[i].position;
                 i = (i + 1) % waypoints.Length;
+                enemySpriteAnim.FlipSprite();
             }
         }
     }

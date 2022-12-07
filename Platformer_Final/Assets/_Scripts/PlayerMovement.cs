@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount;
 
     public GameObject canJumpPlatform;
+    public Animator anim;
     public float speed, normalSpeed, fastSpeed, jumpForce;
     public int jumpMax;
     public bool canJump = true;
@@ -31,15 +32,19 @@ public class PlayerMovement : MonoBehaviour
         {
             yAxisVar = -1;
             jumpCount = 0;
+            anim.SetBool("isJumping", false);
         }
 
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax && canJump)
         {
             yAxisVar = jumpForce;
+            anim.SetBool("isJumping", true);
             jumpCount++;
         }
         
         var horizontalInput = Input.GetAxis("Horizontal");
+        
+        anim.SetFloat("Speed", Mathf.Abs(horizontalInput));
 
         if (Input.GetButtonDown("Fire3"))
         {
@@ -56,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == canJumpPlatform)
+        if (other.gameObject.CompareTag("Platform"))
         {
             canJump = false;
         }
@@ -64,9 +69,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == canJumpPlatform)
+        if (other.gameObject.CompareTag("Platform"))
         {
             canJump = true;
         }
     }
+    
+    
 }

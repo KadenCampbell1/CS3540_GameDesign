@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public IntData enemyHealth;
-    public GameObject enemy;
+    public GameObject enemy, sprite;
 
     private void Start()
     {
@@ -21,6 +21,7 @@ public class EnemyHealth : MonoBehaviour
             if (enemyHealth.value <= 0)
             {
                 Destroy(enemy);
+                Destroy(sprite);
             }
         }
     }

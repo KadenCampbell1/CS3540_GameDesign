@@ -8,23 +8,41 @@ public class PlatformMovement : MonoBehaviour
     public float speed = 2f;
     public int directionNum;
     public GameObject player;
-    public bool canMove = false;
+    public GameObject[] directionCube;
+    public bool canMove = false, stuck = false;
 
 
     void Start()
     {
-        // directionNum = 0;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
     {
         if (Input.GetButtonDown("Jump") && canMove)
         {
+            int i = directionNum;
+            if (stuck)
+            {
+                directionNum += 1;
+            }
+            stuck = false;
+            if (i >= 4)
+            {
+                i = 0;
+            }
+            directionCube[i].SetActive(false);
+            if (directionNum >= 4)
+            {
+                directionNum = 0;
+            }
+            directionCube[directionNum].SetActive(false);
             directionNum++;
             if (directionNum >= 4)
             {
                 directionNum = 0;
             }
+            directionCube[directionNum].SetActive(true);
         }
     }
 
@@ -49,10 +67,15 @@ public class PlatformMovement : MonoBehaviour
             movement = new Vector3(0, speed, 0);
         }
 
-        if (canMove)
+        if (canMove && !stuck)
         {
             transform.position += movement *Time.deltaTime;
         }
+    }
+
+    public void SetStuck(bool value)
+    {
+        stuck = value;
     }
 
     private void OnTriggerEnter(Collider other)

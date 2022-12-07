@@ -7,7 +7,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public GameObject player;
     public IntData playerHealth;
-    public GameCondition lose;
+    public LoseData lose;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == player)
@@ -15,7 +15,7 @@ public class EnemyAttack : MonoBehaviour
             playerHealth.value--;
             if (playerHealth.value <=0)
             {
-                lose.LoseGame();
+                lose.Lose();
             }
         }
     }

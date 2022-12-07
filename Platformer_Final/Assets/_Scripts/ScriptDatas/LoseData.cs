@@ -8,5 +8,10 @@ public class LoseData : ScriptableObject
     {
         SceneManager.LoadScene("LoseScene");
     }
+
+    public void reloadScene(string value)
+    {
+        SceneManager.LoadScene(value);
+    }
 }
 
